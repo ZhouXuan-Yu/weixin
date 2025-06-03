@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.weixin.adapter.WeatherForecastAdapter;
 import com.example.weixin.model.CurrentWeather;
 import com.example.weixin.model.WeatherData;
+import com.example.weixin.utils.DeepSeekHelper;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -52,8 +53,11 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
     private EditText searchEditText;
     private TextView tvCurrentLocation, tvCurrentTemp, tvCurrentCondition, tvFeelsLike;
     private TextView tvCurrentHumidity, tvCurrentPressure, tvCurrentVis;
+    private TextView tvWeatherSuggestion, tvClothingSuggestion, tvHealthSuggestion, tvAiAnalysisTitle;
     private CardView currentWeatherCard, temperatureChartCard, humidityChartCard;
     private CardView pressureChartCard, weatherDistributionCard, forecastCard;
+    private CardView aiSuggestionCard;
+    private Button btnGetSuggestions;
     
     // 图表组件
     private LineChart temperatureChart, pressureChart;
@@ -66,6 +70,8 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
     private List<WeatherData> weatherDataList = new ArrayList<>();
     private CurrentWeather currentWeather;
     private String currentLocation = "未知位置";
+    private String rawWeatherData = "";
+    private String rawForecastData = "";
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -99,6 +105,14 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         weatherDistributionCard = rootView.findViewById(R.id.weatherDistributionCard);
         forecastCard = rootView.findViewById(R.id.forecastCard);
         
+        // AI分析建议卡片
+        aiSuggestionCard = rootView.findViewById(R.id.aiSuggestionCard);
+        tvWeatherSuggestion = rootView.findViewById(R.id.tvWeatherSuggestion);
+        tvClothingSuggestion = rootView.findViewById(R.id.tvClothingSuggestion);
+        tvHealthSuggestion = rootView.findViewById(R.id.tvHealthSuggestion);
+        tvAiAnalysisTitle = rootView.findViewById(R.id.tvAiAnalysisTitle);
+        btnGetSuggestions = rootView.findViewById(R.id.btnGetSuggestions);
+        
         // 图表
         temperatureChart = rootView.findViewById(R.id.temperatureChart);
         humidityChart = rootView.findViewById(R.id.humidityChart);
@@ -123,6 +137,17 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         btnBJ.setOnClickListener(this);
         btnSH.setOnClickListener(this);
         btnTJ.setOnClickListener(this);
+        
+        btnGetSuggestions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentWeather != null && !weatherDataList.isEmpty()) {
+                    getAiWeatherSuggestions();
+                } else {
+                    Toast.makeText(getContext(), "请先获取天气数据", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
     
     @Override
@@ -219,6 +244,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     String responseBody = response.body().string();
+                    rawWeatherData = responseBody; // 保存原始天气数据用于AI分析
                     currentWeather = parseCurrentWeather(responseBody);
                     getActivity().runOnUiThread(() -> updateCurrentWeatherUI());
                 }
@@ -243,6 +269,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     String responseBody = response.body().string();
+                    rawForecastData = responseBody; // 保存原始预报数据用于AI分析
                     weatherDataList = parseForecastWeather(responseBody);
                     getActivity().runOnUiThread(() -> {
                         updateForecastUI();
@@ -491,6 +518,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         pressureChartCard.setVisibility(View.VISIBLE);
         weatherDistributionCard.setVisibility(View.VISIBLE);
         forecastCard.setVisibility(View.VISIBLE);
+        aiSuggestionCard.setVisibility(View.VISIBLE);
     }
     
     private String formatShortDate(String dateStr) {
@@ -503,5 +531,109 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
         return dateStr;
+    }
+    
+    /**
+     * 获取AI天气建议
+     */
+    private void getAiWeatherSuggestions() {
+        if (getActivity() == null) return;
+        
+        // 准备天气数据字符串
+        StringBuilder weatherInfo = new StringBuilder();
+        weatherInfo.append("当前位置: ").append(currentLocation).append("\n");
+        
+        if (currentWeather != null) {
+            weatherInfo.append("当前温度: ").append(currentWeather.getTemp()).append("°C\n");
+            weatherInfo.append("体感温度: ").append(currentWeather.getFeelsLike()).append("°C\n");
+            weatherInfo.append("天气状况: ").append(currentWeather.getText()).append("\n");
+            weatherInfo.append("湿度: ").append(currentWeather.getHumidity()).append("%\n");
+            weatherInfo.append("气压: ").append(currentWeather.getPressure()).append("hPa\n");
+            weatherInfo.append("能见度: ").append(currentWeather.getVis()).append("km\n");
+        }
+        
+        // 添加预报数据
+        if (!weatherDataList.isEmpty()) {
+            weatherInfo.append("\n未来天气预报:\n");
+            for (WeatherData data : weatherDataList) {
+                weatherInfo.append(formatShortDate(data.getDate())).append(": ");
+                weatherInfo.append(data.getTextDay()).append(", ");
+                weatherInfo.append(data.getTempMin()).append("-").append(data.getTempMax()).append("°C, ");
+                weatherInfo.append("降水概率: ").append(data.getPrecipitation()).append("%\n");
+            }
+        }
+        
+        // 显示加载状态
+        tvAiAnalysisTitle.setText("正在分析天气数据...");
+        tvWeatherSuggestion.setText("正在生成天气建议...");
+        tvClothingSuggestion.setText("正在生成穿衣建议...");
+        tvHealthSuggestion.setText("正在生成健康建议...");
+        btnGetSuggestions.setEnabled(false);
+        
+        // 1. 获取天气建议
+        DeepSeekHelper.analyzeWeatherData(weatherInfo.toString(), new DeepSeekHelper.OnAnalysisCompleteListener() {
+            @Override
+            public void onSuccess(String result) {
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(() -> {
+                        tvWeatherSuggestion.setText(result);
+                        tvAiAnalysisTitle.setText("AI智能分析 - " + currentLocation);
+                    });
+                }
+            }
+            
+            @Override
+            public void onError(String errorMessage) {
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(() -> {
+                        tvWeatherSuggestion.setText("获取天气建议失败: " + errorMessage);
+                    });
+                }
+            }
+        });
+        
+        // 2. 获取穿衣建议
+        DeepSeekHelper.getClothingSuggestions(weatherInfo.toString(), new DeepSeekHelper.OnAnalysisCompleteListener() {
+            @Override
+            public void onSuccess(String result) {
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(() -> {
+                        tvClothingSuggestion.setText(result);
+                    });
+                }
+            }
+            
+            @Override
+            public void onError(String errorMessage) {
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(() -> {
+                        tvClothingSuggestion.setText("获取穿衣建议失败: " + errorMessage);
+                    });
+                }
+            }
+        });
+        
+        // 3. 获取健康建议
+        DeepSeekHelper.getHealthSuggestions(weatherInfo.toString(), new DeepSeekHelper.OnAnalysisCompleteListener() {
+            @Override
+            public void onSuccess(String result) {
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(() -> {
+                        tvHealthSuggestion.setText(result);
+                        btnGetSuggestions.setEnabled(true);
+                    });
+                }
+            }
+            
+            @Override
+            public void onError(String errorMessage) {
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(() -> {
+                        tvHealthSuggestion.setText("获取健康建议失败: " + errorMessage);
+                        btnGetSuggestions.setEnabled(true);
+                    });
+                }
+            }
+        });
     }
 }

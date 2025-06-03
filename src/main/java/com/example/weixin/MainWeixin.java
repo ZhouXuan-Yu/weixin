@@ -6,22 +6,31 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MainWeixin extends FragmentActivity {
+public class MainWeixin extends FragmentActivity implements View.OnClickListener {
 
-    private RadioGroup group;
-    private RadioButton weixinButton;
-    private RadioButton friendsButton;
-    private RadioButton findButton;
-    private RadioButton profileButton; // 个人资料按钮，替换原来的游戏按钮
+    private LinearLayout tabWeixin;
+    private LinearLayout tabFriends;
+    private LinearLayout tabFind;
+    private LinearLayout tabProfile;
+    
+    private ImageView imgWeixin;
+    private ImageView imgFriends;
+    private ImageView imgFind;
+    private ImageView imgProfile;
+    
+    private TextView txtWeixin;
+    private TextView txtFriends;
+    private TextView txtFind;
+    private TextView txtProfile;
     
     private WeixinFragment weixinFragment;
     private FriendFragment friendFragment;
     private FindFragment findFragment;
-    private ProfileFragment profileFragment; // 个人资料页面，替换原来的游戏页面
+    private ProfileFragment profileFragment;
     
     private Fragment currentFragment; // 当前显示的Fragment
     private TextView title; // 标题栏
@@ -35,45 +44,114 @@ public class MainWeixin extends FragmentActivity {
         setupListeners();
         
         // 默认选中微信页面
-        weixinButton.setChecked(true);
-        switchFragment(weixinFragment);
-        title.setText("微信");
+        updateTabSelection(0);
     }
     
     private void initViews() {
-        group = findViewById(R.id.main_tab);
-        weixinButton = findViewById(R.id.main_tab_weixin);
-        friendsButton = findViewById(R.id.main_tab_friends);
-        findButton = findViewById(R.id.main_tab_find);
-        profileButton = findViewById(R.id.main_tab_profile); // 修改为个人资料按钮
+        // 初始化标题栏
         title = findViewById(R.id.main_title);
+        
+        // 初始化底部导航栏
+        tabWeixin = findViewById(R.id.main_tab_weixin);
+        tabFriends = findViewById(R.id.main_tab_friends);
+        tabFind = findViewById(R.id.main_tab_find);
+        tabProfile = findViewById(R.id.main_tab_profile);
+        
+        // 初始化图标
+        imgWeixin = findViewById(R.id.weixin_img);
+        imgFriends = findViewById(R.id.contact_img);
+        imgFind = findViewById(R.id.find_img);
+        imgProfile = findViewById(R.id.self_img);
+        
+        // 初始化文本
+        txtWeixin = findViewById(R.id.weixin_text);
+        txtFriends = findViewById(R.id.contact_text);
+        txtFind = findViewById(R.id.find_text);
+        txtProfile = findViewById(R.id.self_text);
         
         // 初始化Fragment
         weixinFragment = new WeixinFragment();
         friendFragment = new FriendFragment();
         findFragment = new FindFragment();
-        profileFragment = new ProfileFragment(); // 修改为个人资料Fragment
+        profileFragment = new ProfileFragment();
     }
     
     private void setupListeners() {
-        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.main_tab_weixin) {
-                    switchFragment(weixinFragment);
-                    title.setText("微信");
-                } else if (checkedId == R.id.main_tab_friends) {
-                    switchFragment(friendFragment);
-                    title.setText("通讯录");
-                } else if (checkedId == R.id.main_tab_find) {
-                    switchFragment(findFragment);
-                    title.setText("发现");
-                } else if (checkedId == R.id.main_tab_profile) { // 修改为个人资料按钮
-                    switchFragment(profileFragment);
-                    title.setText("我");
-                }
-            }
-        });
+        tabWeixin.setOnClickListener(this);
+        tabFriends.setOnClickListener(this);
+        tabFind.setOnClickListener(this);
+        tabProfile.setOnClickListener(this);
+    }
+    
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.main_tab_weixin) {
+            updateTabSelection(0);
+        } else if (v.getId() == R.id.main_tab_friends) {
+            updateTabSelection(1);
+        } else if (v.getId() == R.id.main_tab_find) {
+            updateTabSelection(2);
+        } else if (v.getId() == R.id.main_tab_profile) {
+            updateTabSelection(3);
+        }
+    }
+    
+    /**
+     * 更新底部导航栏状态和切换Fragment
+     */
+    private void updateTabSelection(int index) {
+        // 重置所有Tab状态
+        resetTabState();
+        
+        // 根据选中的Tab设置状态和切换Fragment
+        switch (index) {
+            case 0:
+                // 微信Tab
+                imgWeixin.setImageResource(R.drawable.tab_weixin_pressed);
+                txtWeixin.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                title.setText("微信");
+                switchFragment(weixinFragment);
+                break;
+                
+            case 1:
+                // 通讯录Tab
+                imgFriends.setImageResource(R.drawable.tab_address_pressed);
+                txtFriends.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                title.setText("通讯录");
+                switchFragment(friendFragment);
+                break;
+                
+            case 2:
+                // 发现Tab
+                imgFind.setImageResource(R.drawable.tab_find_frd_pressed);
+                txtFind.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                title.setText("发现");
+                switchFragment(findFragment);
+                break;
+                
+            case 3:
+                // 我Tab
+                imgProfile.setImageResource(R.drawable.tab_settings_pressed);
+                txtProfile.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                title.setText("我");
+                switchFragment(profileFragment);
+                break;
+        }
+    }
+    
+    /**
+     * 重置所有Tab状态
+     */
+    private void resetTabState() {
+        imgWeixin.setImageResource(R.drawable.tab_weixin_normal);
+        imgFriends.setImageResource(R.drawable.tab_address_normal);
+        imgFind.setImageResource(R.drawable.tab_find_frd_normal);
+        imgProfile.setImageResource(R.drawable.tab_settings_normal);
+        
+        txtWeixin.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        txtFriends.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        txtFind.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        txtProfile.setTextColor(getResources().getColor(android.R.color.darker_gray));
     }
     
     /**

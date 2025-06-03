@@ -31,7 +31,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:src="@drawable/search" />
+            android:src="@drawable/search_icon" />
 
         <ImageView
             android:id="@+id/btn_add"
@@ -40,7 +40,7 @@
             android:layout_toLeftOf="@id/btn_search"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:src="@drawable/plus" />
+            android:src="@drawable/plus_icon" />
     </RelativeLayout>
 
     <!-- 聊天列表 -->

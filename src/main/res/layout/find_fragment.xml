@@ -29,7 +29,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
             android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/search" />
+            android:src="@drawable/search_icon" />
 
         <ImageView
             android:id="@+id/plus"
@@ -39,7 +39,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
             android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/plus" />
+            android:src="@drawable/plus_icon" />
     </RelativeLayout>
 
     <ListView

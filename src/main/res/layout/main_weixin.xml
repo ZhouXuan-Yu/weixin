@@ -31,8 +31,8 @@
     </FrameLayout>
 
     <!-- 底部导航栏 -->
-    <RadioGroup
-        android:id="@+id/main_tab"
+    <LinearLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
@@ -41,142 +41,111 @@
         android:orientation="horizontal">
 
         <!-- 微信选项卡 -->
-        <RadioButton
+        <LinearLayout
             android:id="@+id/main_tab_weixin"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/tab_weixin_pressed"
+            android:orientation="vertical"
             android:gravity="center"
-            android:paddingTop="3dp"
-            android:text="微信"
-            android:textColor="#82858b"
-            android:textSize="13sp" />
+            android:padding="3dp">
+            
+            <ImageView
+                android:id="@+id/weixin_img"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/tab_weixin_pressed" />
+
+            <TextView
+                android:id="@+id/weixin_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="微信"
+                android:textColor="#82858b"
+                android:textSize="12sp" />
+        </LinearLayout>
 
         <!-- 通讯录选项卡 -->
-        <RadioButton
+        <LinearLayout
             android:id="@+id/main_tab_friends"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/tab_address_normal"
+            android:orientation="vertical"
             android:gravity="center"
-            android:paddingTop="3dp"
-            android:text="通讯录"
-            android:textColor="#82858b"
-            android:textSize="13sp" />
+            android:padding="3dp">
+            
+            <ImageView
+                android:id="@+id/contact_img"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/tab_address_normal" />
+
+            <TextView
+                android:id="@+id/contact_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="通讯录"
+                android:textColor="#82858b"
+                android:textSize="12sp" />
+        </LinearLayout>
 
         <!-- 发现选项卡 -->
-        <RadioButton
+        <LinearLayout
             android:id="@+id/main_tab_find"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/tab_find_frd_normal"
+            android:orientation="vertical"
             android:gravity="center"
-            android:paddingTop="3dp"
-            android:text="发现"
-            android:textColor="#82858b"
-            android:textSize="13sp" />
+            android:padding="3dp">
+            
+            <ImageView
+                android:id="@+id/find_img"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/tab_find_frd_normal" />
+
+            <TextView
+                android:id="@+id/find_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="发现"
+                android:textColor="#82858b"
+                android:textSize="12sp" />
+        </LinearLayout>
 
         <!-- 个人资料选项卡 -->
-        <RadioButton
+        <LinearLayout
             android:id="@+id/main_tab_profile"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/tab_settings_normal"
+            android:orientation="vertical"
             android:gravity="center"
-            android:paddingTop="3dp"
-            android:text="我"
-            android:textColor="#82858b"
-            android:textSize="13sp" />
-    </RadioGroup>
-
-    <!-- 添加底部选项卡的背景区域（为了保持向后兼容） -->
-    <LinearLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:background="#f7f7f7"
-        android:visibility="gone">
-        
-        <!-- 这部分保留但设置为不可见，以防有其他代码引用这些ID -->
-        <LinearLayout
-            android:id="@+id/weixin_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/weixin_img"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_gravity="center_horizontal" />
-            <TextView
-                android:id="@+id/weixin_text"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/contacts_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/contact_img"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_gravity="center_horizontal" />
-            <TextView
-                android:id="@+id/contact_text"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/find_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/find_img"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_gravity="center_horizontal" />
-            <TextView
-                android:id="@+id/find_text"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/self_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:padding="3dp">
+            
             <ImageView
                 android:id="@+id/self_img"
-                android:layout_width="wrap_content"
+                android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/tab_settings_normal" />
+
             <TextView
                 android:id="@+id/self_text"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="我"
+                android:textColor="#82858b"
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
