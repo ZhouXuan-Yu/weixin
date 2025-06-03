@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WeixinFragment">
+
+    <!-- 标题栏 -->
+    <RelativeLayout
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#EDEDED">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="微信"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btn_search"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/search" />
+
+        <ImageView
+            android:id="@+id/btn_add"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_toLeftOf="@id/btn_search"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/plus" />
+    </RelativeLayout>
+
+    <!-- 聊天列表 -->
+    <ListView
+        android:id="@+id/chat_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/connection_container"
+        android:layout_below="@id/title_layout"
+        android:background="#F8F8F8"
+        android:divider="#E5E5E5"
+        android:dividerHeight="1dp" />
+
+    <!-- 连接设置区域 -->
+    <LinearLayout
+        android:id="@+id/connection_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/message_layout"
+        android:background="#EDEDED"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- 连接方式选择 -->
+        <RadioGroup
+            android:id="@+id/connection_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <RadioButton
+                android:id="@+id/rb_udp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UDP"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/rb_tcp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TCP"
+                android:layout_marginLeft="16dp" />
+
+            <RadioButton
+                android:id="@+id/rb_tcp_server"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TCP服务器"
+                android:layout_marginLeft="16dp" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/connect_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_ip"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="2"
+                android:background="@android:color/white"
+                android:hint="接收方IP"
+                android:inputType="textPersonName"
+                android:paddingLeft="8dp"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_port"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:background="@android:color/white"
+                android:hint="接收端口"
+                android:inputType="number"
+                android:paddingLeft="8dp"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_zhenceport"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:background="@android:color/white"
+                android:hint="侦测端口"
+                android:inputType="number"
+                android:paddingLeft="8dp"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:background="#07C160"
+                android:text="连接"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 消息输入区 -->
+    <LinearLayout
+        android:id="@+id/message_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#F8F8F8"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/et_mess"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:hint="请输入消息"
+            android:inputType="textMultiLine"
+            android:minHeight="36dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="8dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="8dp"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="60dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="8dp"
+            android:background="#07C160"
+            android:text="发送"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- 聊天记录显示区 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/connection_container"
+        android:layout_below="@id/title_layout"
+        android:layout_alignTop="@id/chat_list"
+        android:background="#EDEDED">
+
+        <TextView
+            android:id="@+id/tv_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:textSize="16sp" />
+    </ScrollView>
+</RelativeLayout>

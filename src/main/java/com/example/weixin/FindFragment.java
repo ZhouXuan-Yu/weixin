@@ -1,0 +1,113 @@
+package com.example.weixin;
+
+import androidx.fragment.app.Fragment;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.example.weixin.findSortAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class FindFragment extends Fragment {
+
+    private ListView listView;
+    private ImageView searchButton, addButton;
+    private List<Map<String, String>> list = new ArrayList<>();
+    private int[] pic = new int[]{
+            R.drawable.friend_img, R.drawable.video_img,
+            R.drawable.scan_img, R.drawable.shark_img,
+            R.drawable.look_img, R.drawable.search_img,
+            R.drawable.direct_seeding_img, R.drawable.shopping_img,
+            R.drawable.game_img, R.drawable.small_routine_img,
+            R.drawable.weather0, R.drawable.tab_weixin_pressed,
+            R.drawable.compass
+    };
+    private String[] data = new String[]{
+            "朋友圈", "视频号", "扫一扫",
+            "摇一摇", "看一看", "搜一搜",
+            "直播和附近", "购物", "游戏", "小程序",
+            "天气", "计算器", "指南针"
+    };
+    private int[] pic1 = new int[]{
+            R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img,
+            R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img,
+            R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img,
+            R.drawable.tab_img
+    };
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.find_fragment, container, false);
+
+        listView = view.findViewById(R.id.listView);
+        searchButton = view.findViewById(R.id.search);
+        addButton = view.findViewById(R.id.plus);
+        
+        initData();
+        findSortAdapter adapter = new findSortAdapter(getActivity().getApplicationContext(), list);
+        listView.setAdapter(adapter);
+
+        // 设置搜索和添加按钮的点击事件
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "搜索功能", Toast.LENGTH_SHORT).show();
+            }
+        });
+        
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "添加功能", Toast.LENGTH_SHORT).show();
+            }
+        });
+        
+        // 设置列表项点击事件
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch(position) {
+                    case 10: // 天气功能
+                        Toast.makeText(getActivity(), "打开天气功能", Toast.LENGTH_SHORT).show();
+                        Intent weatherIntent = new Intent(getActivity(), WeatherActivity.class);
+                        startActivity(weatherIntent);
+                        break;
+                    case 11: // 计算器功能
+                        Toast.makeText(getActivity(), "打开计算器", Toast.LENGTH_SHORT).show();
+                        Intent calculatorIntent = new Intent(getActivity(), caclulator.class);
+                        startActivity(calculatorIntent);
+                        break;
+                    case 12: // 指南针功能
+                        Toast.makeText(getActivity(), "打开指南针", Toast.LENGTH_SHORT).show();
+                        Intent compassIntent = new Intent(getActivity(), CompassActivity.class);
+                        startActivity(compassIntent);
+                        break;
+                    default:
+                        Toast.makeText(getActivity(), "点击了: " + data[position], Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+
+        return view;
+    }
+
+    private void initData() {
+        for (int i = 0; i < data.length; i++) {
+            Map<String, String> map = new HashMap<>();
+            map.put("pic", String.valueOf(pic[i]));
+            map.put("title", data[i]);
+            map.put("pic1", String.valueOf(pic1[i]));
+            list.add(map);
+        }
+    }
+}

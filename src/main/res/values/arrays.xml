@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="card_contents">
+        <item>Card 1 Content</item>
+        <item>Card 2 Content</item>
+        <item>Card 3 Content</item>
+        <!-- Add more card contents here -->
+    </string-array>
+</resources>
