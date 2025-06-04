@@ -1,49 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
     
-    <!-- 外圈圆环 -->
+    <!-- 外圆 -->
     <path
-        android:fillColor="#00000000"
-        android:strokeColor="#000000"
-        android:strokeWidth="1.2"
-        android:pathData="M12,12m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0" />
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#333333"
+        android:strokeWidth="2"
+        android:pathData="M120,120 m-118,0 a118,118 0,1 1,236 0 a118,118 0,1 1,-236 0" />
     
-    <!-- 指南针指针 -->
+    <!-- 内圆 -->
     <path
-        android:fillColor="#FF5252"
-        android:pathData="M12,2L14,12H10L12,2Z" />
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#666666"
+        android:strokeWidth="1"
+        android:pathData="M120,120 m-100,0 a100,100 0,1 1,200 0 a100,100 0,1 1,-200 0" />
+    
+    <!-- 北方向标记 -->
     <path
-        android:fillColor="#2196F3"
-        android:pathData="M12,22L10,12H14L12,22Z" />
+        android:fillColor="#E57373"
+        android:pathData="M120,20 l10,30 l-20,0 z" />
+    
+    <!-- 南方向标记 -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M120,220 l-10,-30 l20,0 z" />
+    
+    <!-- 东方向标记 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#333333"
+        android:strokeWidth="1"
+        android:pathData="M220,120 l-30,10 l0,-20 z" />
+    
+    <!-- 西方向标记 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#333333"
+        android:strokeWidth="1"
+        android:pathData="M20,120 l30,-10 l0,20 z" />
+    
+    <!-- 刻度线 - 主要方向 -->
+    <path
+        android:strokeColor="#333333"
+        android:strokeWidth="2"
+        android:pathData="M120,30 L120,40" />
+    <path
+        android:strokeColor="#333333"
+        android:strokeWidth="2"
+        android:pathData="M120,200 L120,210" />
+    <path
+        android:strokeColor="#333333"
+        android:strokeWidth="2"
+        android:pathData="M30,120 L40,120" />
+    <path
+        android:strokeColor="#333333"
+        android:strokeWidth="2"
+        android:pathData="M200,120 L210,120" />
+    
+    <!-- 刻度线 - 次要方向 -->
+    <path
+        android:strokeColor="#666666"
+        android:strokeWidth="1.5"
+        android:pathData="M53,53 L60,60" />
+    <path
+        android:strokeColor="#666666"
+        android:strokeWidth="1.5"
+        android:pathData="M187,53 L180,60" />
+    <path
+        android:strokeColor="#666666"
+        android:strokeWidth="1.5"
+        android:pathData="M53,187 L60,180" />
+    <path
+        android:strokeColor="#666666"
+        android:strokeWidth="1.5"
+        android:pathData="M187,187 L180,180" />
+    
+    <!-- 文字 - 北 -->
+    <path
+        android:fillColor="#E57373"
+        android:pathData="M116,25 h8 v-3 h-3 v-7 h-2 v7 h-3 z" />
+    <!-- 文字 - 南 -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M116,215 h8 v-3 h-3 v-7 h-2 v7 h-3 z" />
+    <!-- 文字 - 东 -->
+    <path
+        android:fillColor="#333333"
+        android:pathData="M210,124 v-8 h3 v3 h7 v2 h-7 v3 z" />
+    <!-- 文字 - 西 -->
+    <path
+        android:fillColor="#333333"
+        android:pathData="M30,124 v-8 h3 v3 h7 v2 h-7 v3 z" />
+    
+    <!-- 指针 - 红色北针 -->
+    <path
+        android:fillColor="#E57373"
+        android:pathData="M120,120 l0,-90 l5,90 l-10,0 z" />
+    <!-- 指针 - 蓝色南针 -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M120,120 l0,90 l5,-90 l-10,0 z" />
     
     <!-- 中心点 -->
     <path
-        android:fillColor="#000000"
-        android:pathData="M12,12m-1.5,0a1.5,1.5 0,1 1,3 0a1.5,1.5 0,1 1,-3 0" />
-    
-    <!-- 刻度标记 -->
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#000000"
-        android:strokeWidth="1"
-        android:pathData="M12,3L12,5" />
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#000000"
-        android:strokeWidth="1"
-        android:pathData="M12,19L12,21" />
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#000000"
-        android:strokeWidth="1"
-        android:pathData="M3,12L5,12" />
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#000000"
-        android:strokeWidth="1"
-        android:pathData="M19,12L21,12" />
+        android:fillColor="#333333"
+        android:pathData="M120,120 m-5,0 a5,5 0,1 1,10 0 a5,5 0,1 1,-10 0" />
 </vector> 

@@ -1,10 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.weixin" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryDark">@color/purple_700</item>
-        <item name="colorAccent">@color/teal_200</item>
-        <!-- Customize your theme here. -->
+    <style name="Theme.weixin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorPrimaryDark">#388E3C</item>
+        <item name="colorAccent">#1E88E5</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
+        <item name="android:navigationBarColor">#121212</item>
+        <item name="android:windowBackground">#121212</item>
+        
+        <!-- 夜间模式文本颜色 -->
+        <item name="android:textColorPrimary">#E0E0E0</item>
+        <item name="android:textColorSecondary">#9E9E9E</item>
+        
+        <!-- 卡片背景 -->
+        <item name="cardBackgroundColor">#212121</item>
+        
+        <!-- 分割线颜色 -->
+        <item name="android:dividerColor">#3D3D3D</item>
     </style>
 </resources>

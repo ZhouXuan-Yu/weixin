@@ -275,7 +275,7 @@
                     android:textColor="?android:attr/textColorPrimary"
                     android:layout_marginBottom="8dp" />
 
-                <com.github.mikephil.charting.charts.LineChart
+                <com.example.weixin.utils.WeatherChartHelper
                     android:id="@+id/temperatureChart"
                     android:layout_width="match_parent"
                     android:layout_height="200dp" />
@@ -592,4 +592,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</ScrollView> 

@@ -13,9 +13,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- 传感器权限 -->
-    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
-    <uses-feature android:name="android.hardware.sensor.compass" android:required="true" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.compass" android:required="false" />
     
     <application
         android:icon="@drawable/wx_logo_icon"
@@ -33,9 +34,16 @@
         <activity android:name=".Reigister" />
         <activity android:name=".LoginUser" />
         <activity android:name=".MainWeixin" />
-        <activity android:name=".caclulator" />
-        <activity android:name=".WeatherActivity" />
-        <activity android:name=".CompassActivity" />
+        <activity
+            android:name=".caclulator"
+            android:exported="false" />
+        <activity
+            android:name=".WeatherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CompassActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity android:name=".ProfileEditActivity" />
     </application>
 </manifest>
