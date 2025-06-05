@@ -10,6 +10,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- 录音权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!-- 访问媒体文件权限 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <!-- 网络状态权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -49,6 +53,9 @@
         <activity android:name=".ProfileEditActivity" />
         <activity
             android:name=".ImageAnalysisActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SpeechRecognitionActivity"
             android:exported="false" />
     </application>
 </manifest>

@@ -287,7 +287,7 @@ public class ImageAnalysisActivity extends AppCompatActivity {
             // 使用JPEG格式和适当的压缩率
             bitmap.compress(Bitmap.CompressFormat.JPEG, 85, byteArrayOutputStream);
             
-            byte[] byteArray = byteArrayOutputStream.toByteArray();
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
             // 使用NO_WRAP避免换行，确保Base64字符串是连续的
             String base64String = Base64.encodeToString(byteArray, Base64.NO_WRAP);
             
@@ -530,10 +530,10 @@ public class ImageAnalysisActivity extends AppCompatActivity {
                 
                 if (jsonResponse.has("choices") && jsonResponse.getJSONArray("choices").length() > 0) {
                     JSONObject choice = jsonResponse.getJSONArray("choices").getJSONObject(0);
-                    if (choice.has("message")) {
-                        JSONObject message = choice.getJSONObject("message");
-                        if (message.has("content")) {
-                            return message.getString("content");
+                            if (choice.has("message")) {
+                                JSONObject message = choice.getJSONObject("message");
+                                if (message.has("content")) {
+                                    return message.getString("content");
                         }
                     }
                 }
