@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class MainWeixin extends FragmentActivity implements View.OnClickListener {
 
@@ -38,6 +40,18 @@ public class MainWeixin extends FragmentActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // 删除顶部最上面的重复标题栏 - 修复方法调用
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        
+        // 设置状态栏颜色与应用背景一致
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(android.R.color.white));
+        
+        // 状态栏深色图标
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        
         setContentView(R.layout.main_weixin);
         
         initViews();

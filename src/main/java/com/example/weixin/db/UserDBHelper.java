@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class UserDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "weixin_user.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2; // 升级版本号
 
     public static final String TABLE_USER = "user_info";
     public static final String COLUMN_ID = "_id";
@@ -18,6 +18,11 @@ public class UserDBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_STUDENT_ID = "student_id";
     public static final String COLUMN_CLASS_NAME = "class_name";
     public static final String COLUMN_AVATAR = "avatar";
+    // 添加新字段
+    public static final String COLUMN_EMAIL = "email";
+    public static final String COLUMN_PHONE = "phone";
+    public static final String COLUMN_MAJOR = "major";
+    public static final String COLUMN_COLLEGE = "college";
 
     // 建表语句
     private static final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER + " (" +
@@ -27,7 +32,11 @@ public class UserDBHelper extends SQLiteOpenHelper {
             COLUMN_NICKNAME + " TEXT, " +
             COLUMN_STUDENT_ID + " TEXT, " +
             COLUMN_CLASS_NAME + " TEXT, " +
-            COLUMN_AVATAR + " TEXT" +
+            COLUMN_AVATAR + " TEXT, " +
+            COLUMN_EMAIL + " TEXT, " +
+            COLUMN_PHONE + " TEXT, " +
+            COLUMN_MAJOR + " TEXT, " +
+            COLUMN_COLLEGE + " TEXT" +
             ");";
 
     public UserDBHelper(Context context) {
@@ -45,18 +54,36 @@ public class UserDBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_NICKNAME, "周雨轩");
         values.put(COLUMN_STUDENT_ID, "202252320116");
         values.put(COLUMN_CLASS_NAME, "2022级智能科学与技术一班");
+        values.put(COLUMN_EMAIL, "zhouyuxuan@student.edu.cn");
+        values.put(COLUMN_PHONE, "18667890123");
+        values.put(COLUMN_MAJOR, "智能科学与技术");
+        values.put(COLUMN_COLLEGE, "信息科学与工程学院");
         db.insert(TABLE_USER, null, values);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
-        onCreate(db);
+        if (oldVersion < 2) {
+            // 添加新字段
+            db.execSQL("ALTER TABLE " + TABLE_USER + " ADD COLUMN " + COLUMN_EMAIL + " TEXT;");
+            db.execSQL("ALTER TABLE " + TABLE_USER + " ADD COLUMN " + COLUMN_PHONE + " TEXT;");
+            db.execSQL("ALTER TABLE " + TABLE_USER + " ADD COLUMN " + COLUMN_MAJOR + " TEXT;");
+            db.execSQL("ALTER TABLE " + TABLE_USER + " ADD COLUMN " + COLUMN_COLLEGE + " TEXT;");
+            
+            // 更新默认用户数据
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_EMAIL, "zhouyuxuan@student.edu.cn");
+            values.put(COLUMN_PHONE, "18667890123");
+            values.put(COLUMN_MAJOR, "智能科学与技术");
+            values.put(COLUMN_COLLEGE, "信息科学与工程学院");
+            db.update(TABLE_USER, values, COLUMN_USERNAME + " = ?", new String[]{"admin"});
+        }
     }
 
     // 添加或更新用户信息
     public long saveUser(String username, String password, String nickname, 
-                        String studentId, String className) {
+                        String studentId, String className, String email,
+                        String phone, String major, String college) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         
@@ -65,6 +92,10 @@ public class UserDBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_NICKNAME, nickname);
         values.put(COLUMN_STUDENT_ID, studentId);
         values.put(COLUMN_CLASS_NAME, className);
+        values.put(COLUMN_EMAIL, email);
+        values.put(COLUMN_PHONE, phone);
+        values.put(COLUMN_MAJOR, major);
+        values.put(COLUMN_COLLEGE, college);
 
         // 检查用户是否已存在
         Cursor cursor = db.query(TABLE_USER, new String[]{COLUMN_ID},
@@ -83,6 +114,13 @@ public class UserDBHelper extends SQLiteOpenHelper {
         
         cursor.close();
         return id;
+    }
+    
+    // 添加简化版本的方法，保持向后兼容性
+    public long saveUser(String username, String password, String nickname, 
+                        String studentId, String className) {
+        return saveUser(username, password, nickname, studentId, className, 
+                "", "", "", "");
     }
 
     // 验证用户登录
