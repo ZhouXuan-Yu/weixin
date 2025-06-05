@@ -12,14 +12,8 @@
         android:background="#EDEDED"
         android:gravity="center_vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
+        <!-- 删除了重复的"发现"标题文本 -->
+        
         <ImageView
             android:id="@+id/search"
             android:layout_width="24dp"

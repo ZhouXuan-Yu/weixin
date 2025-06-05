@@ -10,7 +10,7 @@ public class caclulator extends AppCompatActivity implements View.OnClickListene
 
     // 按钮组件
     private Button[] numberButtons = new Button[10]; // 0-9数字按钮
-    private Button btnPoint, btnAdd, btnSub, btnMul, btnDiv, btnClear, btnDelete, btnEquals;
+    private Button btnPoint, btnAdd, btnSub, btnMul, btnDiv, btnClear, btnDelete, btnEquals, btnMinus;
     private EditText etInput;
     private boolean clearFlag = false; // 是否需要清空输入框
 
@@ -21,6 +21,9 @@ public class caclulator extends AppCompatActivity implements View.OnClickListene
 
         initViews();
         setClickListeners();
+        
+        // 修复可能的布局问题
+        fixLayoutForAllDevices();
     }
 
     /**
@@ -48,7 +51,23 @@ public class caclulator extends AppCompatActivity implements View.OnClickListene
         btnClear = findViewById(R.id.btn_clr);
         btnDelete = findViewById(R.id.btn_del);
         btnEquals = findViewById(R.id.btn_eq);
+        btnMinus = findViewById(R.id.btn_minus);
         etInput = findViewById(R.id.result);
+    }
+
+    /**
+     * 修复在某些设备上可能存在的布局问题
+     */
+    private void fixLayoutForAllDevices() {
+        // 确保最后一行按钮正确显示
+        if (numberButtons[0] != null) {
+            numberButtons[0].post(() -> {
+                // 主动触发布局刷新以解决某些设备上的显示问题
+                numberButtons[0].requestLayout();
+                if (btnPoint != null) btnPoint.requestLayout();
+                if (btnEquals != null) btnEquals.requestLayout();
+            });
+        }
     }
 
     /**
@@ -71,6 +90,7 @@ public class caclulator extends AppCompatActivity implements View.OnClickListene
         if (btnClear != null) btnClear.setOnClickListener(this);
         if (btnDelete != null) btnDelete.setOnClickListener(this);
         if (btnEquals != null) btnEquals.setOnClickListener(this);
+        if (btnMinus != null) btnMinus.setOnClickListener(this);
     }
 
     @Override
@@ -115,7 +135,8 @@ public class caclulator extends AppCompatActivity implements View.OnClickListene
      */
     private boolean isOperator(int viewId) {
         return viewId == R.id.btn_add || viewId == R.id.btn_sub ||
-                viewId == R.id.btn_mul || viewId == R.id.btn_div;
+                viewId == R.id.btn_mul || viewId == R.id.btn_div ||
+                viewId == R.id.btn_minus; // 添加另一个减号按钮
     }
 
     /**

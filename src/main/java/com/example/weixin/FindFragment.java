@@ -23,28 +23,25 @@ public class FindFragment extends Fragment {
     private ListView listView;
     private ImageView searchButton, addButton;
     private List<Map<String, String>> list = new ArrayList<>();
+    // 只保留天气，计算器，指南针，图片分析，语音识别
     private int[] pic = new int[]{
-            R.drawable.friend_img, R.drawable.video_img,
-            R.drawable.scan_img, R.drawable.shark_img,
-            R.drawable.look_img, R.drawable.search_img,
-            R.drawable.direct_seeding_img, R.drawable.shopping_img,
-            R.drawable.game_img, R.drawable.small_routine_img,
-            R.drawable.weather0, R.drawable.tab_weixin_pressed,
-            R.drawable.compass, R.drawable.football1,
+            R.drawable.weather0, 
+            R.drawable.tab_weixin_pressed,
+            R.drawable.compass, 
+            R.drawable.football1,
             R.drawable.audio_icon
     };
     private String[] data = new String[]{
-            "朋友圈", "视频号", "扫一扫",
-            "摇一摇", "看一看", "搜一搜",
-            "直播和附近", "购物", "游戏", "小程序",
-            "天气", "计算器", "指南针", "图片分析",
+            "天气", 
+            "计算器", 
+            "指南针", 
+            "图片分析",
             "语音识别"
     };
+    // 更新右侧箭头图标数量
     private int[] pic1 = new int[]{
-            R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img,
-            R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img,
-            R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img,
-            R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img
+            R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img, 
+            R.drawable.tab_img, R.drawable.tab_img
     };
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,27 +75,27 @@ public class FindFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch(position) {
-                    case 10: // 天气功能
+                    case 0: // 天气功能
                         Toast.makeText(getActivity(), "打开天气功能", Toast.LENGTH_SHORT).show();
                         Intent weatherIntent = new Intent(getActivity(), WeatherActivity.class);
                         startActivity(weatherIntent);
                         break;
-                    case 11: // 计算器功能
+                    case 1: // 计算器功能
                         Toast.makeText(getActivity(), "打开计算器", Toast.LENGTH_SHORT).show();
                         Intent calculatorIntent = new Intent(getActivity(), caclulator.class);
                         startActivity(calculatorIntent);
                         break;
-                    case 12: // 指南针功能
+                    case 2: // 指南针功能
                         Toast.makeText(getActivity(), "打开指南针", Toast.LENGTH_SHORT).show();
                         Intent compassIntent = new Intent(getActivity(), CompassActivity.class);
                         startActivity(compassIntent);
                         break;
-                    case 13: // 图片分析功能
+                    case 3: // 图片分析功能
                         Toast.makeText(getActivity(), "打开图片分析", Toast.LENGTH_SHORT).show();
                         Intent imageAnalysisIntent = new Intent(getActivity(), ImageAnalysisActivity.class);
                         startActivity(imageAnalysisIntent);
                         break;
-                    case 14: // 语音识别功能
+                    case 4: // 语音识别功能
                         Toast.makeText(getActivity(), "打开语音识别", Toast.LENGTH_SHORT).show();
                         Intent speechRecognitionIntent = new Intent(getActivity(), SpeechRecognitionActivity.class);
                         startActivity(speechRecognitionIntent);

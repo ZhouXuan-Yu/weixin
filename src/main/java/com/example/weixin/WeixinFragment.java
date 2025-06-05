@@ -144,17 +144,19 @@ public class WeixinFragment extends Fragment {
                 }
 
                 try {
-                    receiveport = Integer.parseInt(receivePortString);
+                    // 解析接收端口，如果为空则设为0
+                    receiveport = receivePortString.isEmpty() ? 0 : Integer.parseInt(receivePortString);
                     
                     // 根据不同连接类型进行连接
                     switch (currentCommType) {
                         case COMM_UDP:
                             String zhencePortString = etzhenceport.getText().toString();
+                            // 侦测端口是必填项
                             if (zhencePortString.isEmpty()) {
                                 Toast.makeText(getActivity(), "请填写侦测端口", Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                    zhenceport = Integer.parseInt(zhencePortString);
+                            zhenceport = Integer.parseInt(zhencePortString);
                             connectUDP();
                             break;
                             
@@ -225,6 +227,21 @@ public class WeixinFragment extends Fragment {
             receivesocket.close();
         }
 
+        // 确保所有字段都有值，如果为空则使用默认值
+        if (ip == null || ip.isEmpty()) {
+            ip = "0";
+        }
+        
+        if (receiveport <= 0) {
+            receiveport = 0;
+        }
+        
+        if (zhenceport <= 0) {
+            // 必须指定有效的侦测端口
+            Toast.makeText(getActivity(), "侦测端口必须设置", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // 开始接收消息
         isConnected = true;
         new Thread(new ReceiveMessage()).start();
@@ -241,6 +258,16 @@ public class WeixinFragment extends Fragment {
      * 连接TCP客户端
      */
     private void connectTCPClient() {
+        // 确保IP不为空
+        if (ip == null || ip.isEmpty()) {
+            ip = "0";
+        }
+        
+        if (receiveport <= 0) {
+            Toast.makeText(getActivity(), "接收端口必须设置", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         messageService.connectToServer(ip, receiveport);
         // 连接结果会通过Handler返回
     }
@@ -249,6 +276,11 @@ public class WeixinFragment extends Fragment {
      * 启动TCP服务器
      */
     private void startTCPServer(int port) {
+        if (port <= 0) {
+            Toast.makeText(getActivity(), "服务器端口必须设置", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
         messageService.startServer(port);
         // 启动结果会通过Handler返回
     }
