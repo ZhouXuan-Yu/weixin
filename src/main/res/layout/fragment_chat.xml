@@ -7,49 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".WeixinFragment">
 
-    <!-- 标题栏 -->
-    <RelativeLayout
-        android:id="@+id/title_layout"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="#EDEDED">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="微信"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/btn_search"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/search_icon" />
-
-        <ImageView
-            android:id="@+id/btn_add"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_toLeftOf="@id/btn_search"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/plus_icon" />
-    </RelativeLayout>
-
     <!-- 聊天列表 -->
     <ListView
         android:id="@+id/chat_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/connection_container"
-        android:layout_below="@id/title_layout"
         android:background="#F8F8F8"
         android:divider="#E5E5E5"
         android:dividerHeight="1dp" />
@@ -189,7 +152,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/connection_container"
-        android:layout_below="@id/title_layout"
         android:layout_alignTop="@id/chat_list"
         android:background="#EDEDED">
 

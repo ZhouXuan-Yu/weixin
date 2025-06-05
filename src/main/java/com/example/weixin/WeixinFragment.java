@@ -46,7 +46,6 @@ public class WeixinFragment extends Fragment {
     EditText etip, etreceiveport, etzhenceport, etmess;
     Button btnok, btnsend;
     TextView tvshow;
-    ImageView btnSearch, btnAdd;
     ListView chatListView;
     RadioButton rbUdp, rbTcp, rbTcpServer;
     RadioGroup connectionType;
@@ -197,21 +196,7 @@ public class WeixinFragment extends Fragment {
                 }
                 
                 sendMessage(message);
-            }
-        });
-        
-        // 添加搜索和添加按钮点击事件
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "搜索功能", Toast.LENGTH_SHORT).show();
-            }
-        });
-        
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "添加联系人", Toast.LENGTH_SHORT).show();
+                etmess.setText(""); // 清空消息框
             }
         });
 
@@ -338,8 +323,6 @@ public class WeixinFragment extends Fragment {
         btnsend = view.findViewById(R.id.btn_send);
         tvshow = view.findViewById(R.id.tv_show);
         chatListView = view.findViewById(R.id.chat_list);
-        btnSearch = view.findViewById(R.id.btn_search);
-        btnAdd = view.findViewById(R.id.btn_add);
         
         connectionType = view.findViewById(R.id.connection_type);
         rbUdp = view.findViewById(R.id.rb_udp);
