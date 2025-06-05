@@ -1,0 +1,14 @@
+dependencies {
+    // ... 现有依赖 ...
+    
+    // 添加DashScope SDK依赖
+    implementation 'com.alibaba.dashscope:dashscope-sdk-java:2.18.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
+    
+    // 图片加载库
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+} 

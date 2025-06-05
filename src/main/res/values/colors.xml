@@ -23,6 +23,10 @@
 
     <color name="colorAccent">#FF4081</color>
 
+    <color name="colorPrimary">#4CAF50</color>
+    <color name="colorPrimaryDark">#388E3C</color>
+    <color name="design_default_color_error">#F44336</color>
+
     <declare-styleable name="SideBar">
         <attr name="scaleSize" format="integer"/>
         <attr name="scaleItemCount" format="integer"/>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+    
+    <!-- 北指针 (红色) - 现代化设计 -->
+    <path
+        android:fillColor="#FF4444"
+        android:pathData="M120,25 L135,115 L120,110 L105,115 Z" />
+    
+    <!-- 北指针边缘阴影 -->
+    <path
+        android:fillColor="#CC0000"
+        android:pathData="M120,25 L105,115 L120,110 Z" />
+    
+    <!-- 南指针 (蓝色) -->
+    <path
+        android:fillColor="#4477FF"
+        android:pathData="M120,215 L135,125 L120,130 L105,125 Z" />
+    
+    <!-- 南指针边缘阴影 -->
+    <path
+        android:fillColor="#0033CC"
+        android:pathData="M120,215 L105,125 L120,130 Z" />
+    
+    <!-- 中心圆外环 -->
+    <path
+        android:fillColor="#444444"
+        android:strokeColor="#222222"
+        android:strokeWidth="0.5"
+        android:pathData="M120,120 m-12,0 a12,12 0 1,0 24,0 a12,12 0 1,0 -24,0" />
+    
+    <!-- 中心圆内环 -->
+    <path
+        android:fillColor="#333333"
+        android:pathData="M120,120 m-10,0 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0" />
+    
+    <!-- 中心圆 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#444444"
+        android:strokeWidth="0.5"
+        android:pathData="M120,120 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" />
+    
+    <!-- 中心点 -->
+    <path
+        android:fillColor="#FF4444"
+        android:pathData="M120,120 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
+    
+    <!-- 十字刻度 -->
+    <path
+        android:strokeColor="#AAFFFFFF"
+        android:strokeWidth="0.5"
+        android:pathData="M116,120 L124,120 M120,116 L120,124" />
+    
+    <!-- 角度辅助线（移除了不兼容的strokeDashArray和strokeLineCap） -->
+    <path
+        android:strokeColor="#33FFFFFF"
+        android:strokeWidth="0.25"
+        android:pathData="M120,120 L120,40" />
+</vector> 

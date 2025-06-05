@@ -17,7 +17,7 @@
         <item name="cardBackgroundColor">#FFFFFF</item>
         
         <!-- 分割线颜色 -->
-        <item name="android:dividerColor">#E0E0E0</item>
+        <item name="android:listDivider">@drawable/list_divider_light</item>
     </style>
 
 

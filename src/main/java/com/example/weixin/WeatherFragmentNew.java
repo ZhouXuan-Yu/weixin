@@ -25,6 +25,8 @@ import com.example.weixin.utils.DeepSeekHelper;
 import com.example.weixin.utils.WeatherChartHelper;
 import com.example.weixin.utils.PieChartHelper;
 
+import io.noties.markwon.Markwon;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -163,8 +165,8 @@ public class WeatherFragmentNew extends Fragment implements View.OnClickListener
         // 设置反馈按钮点击事件
         btnGoodFeedback.setOnClickListener(v -> {
             isPositiveFeedback = true;
-            btnGoodFeedback.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_green_dark));
-            btnBadFeedback.setBackgroundTintList(getResources().getColorStateList(R.color.design_default_color_error));
+            btnGoodFeedback.setBackgroundTintList(androidx.core.content.ContextCompat.getColorStateList(getContext(), android.R.color.holo_green_dark));
+            btnBadFeedback.setBackgroundTintList(androidx.core.content.ContextCompat.getColorStateList(getContext(), R.color.design_default_color_error));
             btnBadFeedback.setAlpha(0.5f);
             btnGoodFeedback.setAlpha(1.0f);
             etFeedbackText.setVisibility(View.GONE);
@@ -173,8 +175,8 @@ public class WeatherFragmentNew extends Fragment implements View.OnClickListener
         
         btnBadFeedback.setOnClickListener(v -> {
             isPositiveFeedback = false;
-            btnBadFeedback.setBackgroundTintList(getResources().getColorStateList(R.color.design_default_color_error));
-            btnGoodFeedback.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_green_dark));
+            btnBadFeedback.setBackgroundTintList(androidx.core.content.ContextCompat.getColorStateList(getContext(), R.color.design_default_color_error));
+            btnGoodFeedback.setBackgroundTintList(androidx.core.content.ContextCompat.getColorStateList(getContext(), android.R.color.holo_green_dark));
             btnGoodFeedback.setAlpha(0.5f);
             btnBadFeedback.setAlpha(1.0f);
             etFeedbackText.setVisibility(View.VISIBLE);
@@ -238,13 +240,13 @@ public class WeatherFragmentNew extends Fragment implements View.OnClickListener
     // 模拟天气数据用于测试
     private void simulateWeatherData() {
         currentWeather = new CurrentWeather();
-        currentWeather.setLocation(currentLocation);
-        currentWeather.setTemperature(23);
-        currentWeather.setWeatherText("晴");
-        currentWeather.setFeelsLike(25);
-        currentWeather.setHumidity(45);
-        currentWeather.setPressure(1013);
-        currentWeather.setVisibility(10);
+        // CurrentWeather没有location属性，使用其他属性存储位置信息
+        currentWeather.setText(currentLocation);
+        currentWeather.setTemp(String.valueOf(23));
+        currentWeather.setFeelsLike(String.valueOf(25));
+        currentWeather.setHumidity(String.valueOf(45));
+        currentWeather.setPressure(String.valueOf(1013));
+        currentWeather.setVis(String.valueOf(10));
         
         updateCurrentWeatherUI();
     }
@@ -255,12 +257,12 @@ public class WeatherFragmentNew extends Fragment implements View.OnClickListener
         
         for (int i = 0; i < 3; i++) {
             WeatherData data = new WeatherData();
-            data.setDate("2023-06-" + (20 + i));
-            data.setMinTemp(18 + i);
-            data.setMaxTemp(28 + i);
-            data.setWeatherText(i == 1 ? "多云" : "晴");
-            data.setHumidity(45 + i * 5);
-            data.setPressure(1013 - i);
+            data.setFxDate("2023-06-" + (20 + i));
+            data.setTempMin(String.valueOf(18 + i));
+            data.setTempMax(String.valueOf(28 + i));
+            data.setTextDay(i == 1 ? "多云" : "晴");
+            data.setHumidity(String.valueOf(45 + i * 5));
+            data.setPressure(String.valueOf(1013 - i));
             weatherDataList.add(data);
         }
         
@@ -271,13 +273,13 @@ public class WeatherFragmentNew extends Fragment implements View.OnClickListener
     private void updateCurrentWeatherUI() {
         if (currentWeather == null) return;
         
-        tvCurrentLocation.setText(currentWeather.getLocation());
-        tvCurrentTemp.setText(currentWeather.getTemperature() + "°");
-        tvCurrentCondition.setText(currentWeather.getWeatherText());
+        tvCurrentLocation.setText(currentLocation);
+        tvCurrentTemp.setText(currentWeather.getTemp() + "°");
+        tvCurrentCondition.setText(currentWeather.getText());
         tvFeelsLike.setText("体感温度: " + currentWeather.getFeelsLike() + "°");
         tvCurrentHumidity.setText(currentWeather.getHumidity() + "%");
         tvCurrentPressure.setText(currentWeather.getPressure() + "hPa");
-        tvCurrentVis.setText(currentWeather.getVisibility() + "km");
+        tvCurrentVis.setText(currentWeather.getVis() + "km");
         
         currentWeatherCard.setVisibility(View.VISIBLE);
     }
@@ -303,8 +305,8 @@ public class WeatherFragmentNew extends Fragment implements View.OnClickListener
         List<String> dates = new ArrayList<>();
         
         for (WeatherData data : weatherDataList) {
-            temps.add((float) data.getMaxTemp());
-            dates.add(formatShortDate(data.getDate()));
+            temps.add(data.getTempMaxFloat());
+            dates.add(formatShortDate(data.getFxDate()));
         }
         
         temperatureChart.setData(temps, dates);
@@ -322,8 +324,8 @@ public class WeatherFragmentNew extends Fragment implements View.OnClickListener
         List<String> dates = new ArrayList<>();
         
         for (WeatherData data : weatherDataList) {
-            humidity.add((float) data.getHumidity());
-            dates.add(formatShortDate(data.getDate()));
+            humidity.add(data.getHumidityFloat());
+            dates.add(formatShortDate(data.getFxDate()));
         }
         
         humidityChart.setData(humidity, dates);
@@ -343,8 +345,8 @@ public class WeatherFragmentNew extends Fragment implements View.OnClickListener
         List<String> dates = new ArrayList<>();
         
         for (WeatherData data : weatherDataList) {
-            pressure.add((float) data.getPressure());
-            dates.add(formatShortDate(data.getDate()));
+            pressure.add(data.getPressureFloat());
+            dates.add(formatShortDate(data.getFxDate()));
         }
         
         pressureChart.setData(pressure, dates);
@@ -361,7 +363,7 @@ public class WeatherFragmentNew extends Fragment implements View.OnClickListener
         // 统计不同天气类型的出现次数
         Map<String, Integer> weatherCounts = new HashMap<>();
         for (WeatherData data : weatherDataList) {
-            String weatherText = data.getWeatherText();
+            String weatherText = data.getTextDay();
             weatherCounts.put(weatherText, weatherCounts.getOrDefault(weatherText, 0) + 1);
         }
         
@@ -410,10 +412,23 @@ public class WeatherFragmentNew extends Fragment implements View.OnClickListener
         // 显示加载状态
         Toast.makeText(getContext(), "正在获取AI智能建议...", Toast.LENGTH_SHORT).show();
         
-        // 模拟AI生成的建议
-        tvWeatherSuggestion.setText("今天天气晴朗，非常适合户外活动。建议您可以安排户外散步、跑步或者其他户外休闲活动。");
-        tvClothingSuggestion.setText("天气温暖，建议穿轻薄的衣物，如短袖T恤、轻便裤子或裙子。外出时可带一件薄外套，以防温度变化。");
-        tvHealthSuggestion.setText("天气良好，但紫外线较强，外出时请做好防晒措施，涂抹防晒霜，戴太阳镜和帽子。多喝水保持身体水分。");
+        // 创建Markdown解析器
+        final Markwon markwon = Markwon.create(getContext());
+        
+        // 天气建议
+        String weatherSuggestion = "**今日天气:** 天气晴朗（26℃），湿度（50%）和气压（1011hPa）正常，但紫外线极强（指数12），需防晒。未来7日气温适宜（21-31℃），湿度舒爽（06/06≈93%），可能引发呼吸不适，加重呼吸道或关节问题。";
+        markwon.setMarkdown(tvWeatherSuggestion, weatherSuggestion);
+        
+        // 穿衣建议
+        String clothingSuggestion = "**老人/慢性病患者建议:**\n\n" +
+                                  "1. **基本/便利病患者:** 避免升高可引发喘息、关节炎、建议室内除湿、显示黎明外出；\n" +
+                                  "2. **儿童:** 紫外线强烈，出出需戴帽、涂防晒霜、避免长时间处于烈日下；";
+        markwon.setMarkdown(tvClothingSuggestion, clothingSuggestion);
+        
+        // 健康建议
+        String healthSuggestion = "**健康分析与建议（天津）**\n\n" + 
+                                "**当前影响**：今温适中（26℃），湿度（50%）和气压（1011hPa）正常，但紫外线极强（指数12），需防晒。未来7日气温适宜（21-31℃），湿度舒爽（06/06≈93%），可能引发呼吸不适，加重呼吸道或关节问题。";
+        markwon.setMarkdown(tvHealthSuggestion, healthSuggestion);
         
         // 显示反馈组件
         feedbackLayout.setVisibility(View.VISIBLE);

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+    
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M120,120 m-120,0 a120,120 0 1,0 240,0 a120,120 0 1,0 -240,0" />
+    
+    <!-- 外圆边框 -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M120,120 m-112,0 a112,112 0 1,0 224,0 a112,112 0 1,0 -224,0"
+        android:strokeWidth="2"
+        android:strokeColor="#444444" />
+    
+    <!-- 内圆 -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M120,120 m-90,0 a90,90 0 1,0 180,0 a90,90 0 1,0 -180,0"
+        android:strokeWidth="1"
+        android:strokeColor="#333333" />
+    
+    <!-- 30度刻度 -->
+    <group>
+        <path
+            android:pathData="M120,10 L120,30"
+            android:strokeWidth="2"
+            android:strokeColor="#FF4444" />
+        <path
+            android:pathData="M175,35 L165,47"
+            android:strokeWidth="1.5"
+            android:strokeColor="#FFFFFF" />
+        <path
+            android:pathData="M205,65 L193,77"
+            android:strokeWidth="1.5"
+            android:strokeColor="#FFFFFF" />
+        <path
+            android:pathData="M230,120 L210,120"
+            android:strokeWidth="2"
+            android:strokeColor="#FFFFFF" />
+        <path
+            android:pathData="M205,175 L193,163"
+            android:strokeWidth="1.5"
+            android:strokeColor="#FFFFFF" />
+        <path
+            android:pathData="M175,205 L165,193"
+            android:strokeWidth="1.5"
+            android:strokeColor="#FFFFFF" />
+        <path
+            android:pathData="M120,230 L120,210"
+            android:strokeWidth="2"
+            android:strokeColor="#FFFFFF" />
+        <path
+            android:pathData="M65,205 L75,193"
+            android:strokeWidth="1.5"
+            android:strokeColor="#FFFFFF" />
+        <path
+            android:pathData="M35,175 L47,163"
+            android:strokeWidth="1.5"
+            android:strokeColor="#FFFFFF" />
+        <path
+            android:pathData="M10,120 L30,120"
+            android:strokeWidth="2"
+            android:strokeColor="#FFFFFF" />
+        <path
+            android:pathData="M35,65 L47,77"
+            android:strokeWidth="1.5"
+            android:strokeColor="#FFFFFF" />
+        <path
+            android:pathData="M65,35 L75,47"
+            android:strokeWidth="1.5"
+            android:strokeColor="#FFFFFF" />
+    </group>
+    
+    <!-- 15度刻度 -->
+    <group>
+        <path
+            android:pathData="M150,22 L145,32"
+            android:strokeWidth="1"
+            android:strokeColor="#666666" />
+        <path
+            android:pathData="M190,50 L180,60"
+            android:strokeWidth="1"
+            android:strokeColor="#666666" />
+        <path
+            android:pathData="M218,90 L208,95"
+            android:strokeWidth="1"
+            android:strokeColor="#666666" />
+        <path
+            android:pathData="M218,150 L208,145"
+            android:strokeWidth="1"
+            android:strokeColor="#666666" />
+        <path
+            android:pathData="M190,190 L180,180"
+            android:strokeWidth="1"
+            android:strokeColor="#666666" />
+        <path
+            android:pathData="M150,218 L145,208"
+            android:strokeWidth="1"
+            android:strokeColor="#666666" />
+        <path
+            android:pathData="M90,218 L95,208"
+            android:strokeWidth="1"
+            android:strokeColor="#666666" />
+        <path
+            android:pathData="M50,190 L60,180"
+            android:strokeWidth="1"
+            android:strokeColor="#666666" />
+        <path
+            android:pathData="M22,150 L32,145"
+            android:strokeWidth="1"
+            android:strokeColor="#666666" />
+        <path
+            android:pathData="M22,90 L32,95"
+            android:strokeWidth="1"
+            android:strokeColor="#666666" />
+        <path
+            android:pathData="M50,50 L60,60"
+            android:strokeWidth="1"
+            android:strokeColor="#666666" />
+        <path
+            android:pathData="M90,22 L95,32"
+            android:strokeWidth="1"
+            android:strokeColor="#666666" />
+    </group>
+    
+    <!-- 5度刻度 -->
+    <group>
+        <path
+            android:pathData="M120,32 L120,35"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M135,33 L134,36"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M165,50 L162,52"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M177,65 L174,68"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M190,80 L187,83"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M208,105 L205,107"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M208,135 L205,133"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M190,160 L187,157"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M177,175 L174,172"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M165,190 L162,188"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M135,207 L134,204"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M120,208 L120,205"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M105,207 L106,204"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M75,190 L78,188"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M63,175 L66,172"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M50,160 L53,157"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M32,135 L35,133"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M32,105 L35,107"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M50,80 L53,83"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M63,65 L66,68"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M75,50 L78,52"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+        <path
+            android:pathData="M105,33 L106,36"
+            android:strokeWidth="0.5"
+            android:strokeColor="#555555" />
+    </group>
+    
+    <!-- 方向标记 - 北 -->
+    <path
+        android:fillColor="#FF4444"
+        android:pathData="M120,15 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" />
+    
+    <!-- 北 (N) 字符路径 -->
+    <path
+        android:fillColor="#FF4444"
+        android:pathData="M115,11 L117,11 L117,17 L123,11 L125,11 L125,19 L123,19 L123,13 L117,19 L115,19 Z" />
+    
+    <!-- 方向标记 - 东 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M225,120 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" />
+        
+    <!-- 东 (E) 字符路径 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M221,116 L229,116 L229,118 L223,118 L223,119 L228,119 L228,121 L223,121 L223,122 L229,122 L229,124 L221,124 Z" />
+    
+    <!-- 方向标记 - 南 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M120,225 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" />
+        
+    <!-- 南 (S) 字符路径 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M116,221 L124,221 L124,223 L118,223 L118,224 L124,224 L124,229 L116,229 L116,227 L122,227 L122,226 L116,226 Z" />
+    
+    <!-- 方向标记 - 西 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M15,120 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" />
+        
+    <!-- 西 (W) 字符路径 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M9,116 L11,116 L13,122 L15,116 L17,116 L19,122 L21,116 L23,116 L20,124 L18,124 L15,118 L12,124 L10,124 Z" />
+    
+    <!-- 中心圆点 -->
+    <path
+        android:fillColor="#444444"
+        android:pathData="M120,120 m-5,0 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0" />
+</vector> 

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+    
+    <!-- 背景圆形 -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M120,120 m-110,0 a110,110 0 1,0 220,0 a110,110 0 1,0 -220,0"
+        android:strokeWidth="2"
+        android:strokeColor="#333333" />
+    
+    <!-- 刻度线 - 北 -->
+    <path
+        android:pathData="M120,10 L120,30"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFF" />
+    
+    <!-- 刻度线 - 东 -->
+    <path
+        android:pathData="M230,120 L210,120"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFF" />
+    
+    <!-- 刻度线 - 南 -->
+    <path
+        android:pathData="M120,230 L120,210"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFF" />
+    
+    <!-- 刻度线 - 西 -->
+    <path
+        android:pathData="M10,120 L30,120"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFF" />
+    
+    <!-- 刻度线 - 东北 -->
+    <path
+        android:pathData="M190,50 L176,64"
+        android:strokeWidth="1.5"
+        android:strokeColor="#FFFFFF" />
+    
+    <!-- 刻度线 - 东南 -->
+    <path
+        android:pathData="M190,190 L176,176"
+        android:strokeWidth="1.5"
+        android:strokeColor="#FFFFFF" />
+    
+    <!-- 刻度线 - 西南 -->
+    <path
+        android:pathData="M50,190 L64,176"
+        android:strokeWidth="1.5"
+        android:strokeColor="#FFFFFF" />
+    
+    <!-- 刻度线 - 西北 -->
+    <path
+        android:pathData="M50,50 L64,64"
+        android:strokeWidth="1.5"
+        android:strokeColor="#FFFFFF" />
+    
+    <!-- 方向文字 - 北 -->
+    <path
+        android:pathData="M115,10 h10 v15 h-10 z"
+        android:fillColor="#00000000"
+        android:strokeWidth="0" />
+    <text
+        android:textSize="14sp"
+        android:textColor="#FF4444"
+        android:text="N"
+        android:x="115dp"
+        android:y="25dp" />
+    
+    <!-- 方向文字 - 东 -->
+    <path
+        android:pathData="M215,115 h15 v10 h-15 z"
+        android:fillColor="#00000000"
+        android:strokeWidth="0" />
+    <text
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:text="E"
+        android:x="220dp"
+        android:y="125dp" />
+    
+    <!-- 方向文字 - 南 -->
+    <path
+        android:pathData="M115,215 h10 v15 h-10 z"
+        android:fillColor="#00000000"
+        android:strokeWidth="0" />
+    <text
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:text="S"
+        android:x="115dp"
+        android:y="230dp" />
+    
+    <!-- 方向文字 - 西 -->
+    <path
+        android:pathData="M10,115 h15 v10 h-15 z"
+        android:fillColor="#00000000"
+        android:strokeWidth="0" />
+    <text
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:text="W"
+        android:x="15dp"
+        android:y="125dp" />
+    
+    <!-- 小刻度线 -->
+    <path
+        android:pathData="M120,40 L120,45"
+        android:strokeWidth="1"
+        android:strokeColor="#999999" />
+    <path
+        android:pathData="M120,195 L120,200"
+        android:strokeWidth="1"
+        android:strokeColor="#999999" />
+    <path
+        android:pathData="M40,120 L45,120"
+        android:strokeWidth="1"
+        android:strokeColor="#999999" />
+    <path
+        android:pathData="M195,120 L200,120"
+        android:strokeWidth="1"
+        android:strokeColor="#999999" />
+</vector> 

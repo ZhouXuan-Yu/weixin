@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    
+    <!-- 足球场背景 -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M0,0 L200,0 L200,200 L0,200 Z" />
+    
+    <!-- 场地标记线 -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2"
+        android:pathData="M100,20 L100,180" />
+    
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2"
+        android:pathData="M20,100 L180,100" />
+    
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2"
+        android:fillColor="#00000000"
+        android:pathData="M100,100 m-40,0 a40,40 0 1,0 80,0 a40,40 0 1,0 -80,0" />
+    
+    <!-- 足球 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M80,90 m-15,0 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0" />
+    
+    <!-- 球员1 -->
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="M40,80 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" />
+    
+    <!-- 球员2 -->
+    <path
+        android:fillColor="#0000FF"
+        android:pathData="M120,90 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" />
+    
+    <!-- 球员3 -->
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="M75,130 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" />
+    
+    <!-- 球员4 -->
+    <path
+        android:fillColor="#0000FF"
+        android:pathData="M150,130 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" />
+</vector> 

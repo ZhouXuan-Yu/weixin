@@ -136,7 +136,7 @@ public class WeixinFragment extends Fragment {
                 
                 ip = etip.getText().toString();
                 String receivePortString = etreceiveport.getText().toString();
-                
+
                 // 添加输入验证
                 if (currentCommType != COMM_TCP_SERVER && (ip.isEmpty() || receivePortString.isEmpty())) {
                     Toast.makeText(getActivity(), "请确保填写完整的IP地址和端口号", Toast.LENGTH_SHORT).show();
@@ -154,7 +154,7 @@ public class WeixinFragment extends Fragment {
                                 Toast.makeText(getActivity(), "请填写侦测端口", Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            zhenceport = Integer.parseInt(zhencePortString);
+                    zhenceport = Integer.parseInt(zhencePortString);
                             connectUDP();
                             break;
                             
@@ -560,7 +560,7 @@ public class WeixinFragment extends Fragment {
                 pack = new DatagramPacket(buffer, buffer.length, inetaddress, receiveport);
                 
                 if (sendsocket == null || sendsocket.isClosed()) {
-                    sendsocket = new DatagramSocket();
+                sendsocket = new DatagramSocket();
                     sendsocket.setSoTimeout(1000); // 设置超时时间
                 }
                 
@@ -584,10 +584,10 @@ public class WeixinFragment extends Fragment {
             try {
                 // 初始化接收socket
                 if (receivesocket == null || receivesocket.isClosed()) {
-                    receivesocket = new DatagramSocket(null);
-                    receivesocket.setReuseAddress(true);
+                receivesocket = new DatagramSocket(null);
+                receivesocket.setReuseAddress(true);
                     receivesocket.setSoTimeout(5000); // 设置超时，避免阻塞
-                    receivesocket.bind(new InetSocketAddress(zhenceport));
+                receivesocket.bind(new InetSocketAddress(zhenceport));
                 }
                 
                 byte[] buffer = new byte[8192];
@@ -665,8 +665,8 @@ public class WeixinFragment extends Fragment {
                 ackSocket.send(ackPacket);
                 ackSocket.close();
             } catch (IOException e) {
-                e.printStackTrace();
-            }
+                    e.printStackTrace();
+                }
         }
     }
 

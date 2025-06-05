@@ -17,7 +17,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="专业天气预报"
+            android:text="天气预报"
             android:textAlignment="center"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="24sp"

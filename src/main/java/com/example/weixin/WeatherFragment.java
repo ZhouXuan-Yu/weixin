@@ -67,9 +67,10 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
     private boolean isPositiveFeedback = true;
     
     // 图表组件
-    private LineChart temperatureChart, pressureChart;
-    private BarChart humidityChart;
-    private PieChart weatherDistributionChart;
+    private LineChart temperatureChart;
+    private com.example.weixin.utils.WeatherChartHelper humidityChart;
+    private com.example.weixin.utils.WeatherChartHelper pressureChart;
+    private com.example.weixin.utils.PieChartHelper weatherDistributionChart;
     private RecyclerView forecastRecyclerView;
     private WeatherForecastAdapter forecastAdapter;
     
@@ -125,7 +126,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         btnGetSuggestions = rootView.findViewById(R.id.btnGetSuggestions);
         
         // 图表
-        temperatureChart = rootView.findViewById(R.id.temperatureChart);
+        temperatureChart = (LineChart) rootView.findViewById(R.id.temperatureChart);
         humidityChart = rootView.findViewById(R.id.humidityChart);
         pressureChart = rootView.findViewById(R.id.pressureChart);
         weatherDistributionChart = rootView.findViewById(R.id.weatherDistributionChart);
@@ -170,8 +171,8 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         // 设置反馈按钮点击事件
         btnGoodFeedback.setOnClickListener(v -> {
             isPositiveFeedback = true;
-            btnGoodFeedback.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_green_dark));
-            btnBadFeedback.setBackgroundTintList(getResources().getColorStateList(R.color.design_default_color_error));
+            btnGoodFeedback.setBackgroundTintList(androidx.core.content.ContextCompat.getColorStateList(getContext(), android.R.color.holo_green_dark));
+            btnBadFeedback.setBackgroundTintList(androidx.core.content.ContextCompat.getColorStateList(getContext(), R.color.design_default_color_error));
             btnBadFeedback.setAlpha(0.5f);
             btnGoodFeedback.setAlpha(1.0f);
             etFeedbackText.setVisibility(View.GONE);
@@ -180,8 +181,8 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         
         btnBadFeedback.setOnClickListener(v -> {
             isPositiveFeedback = false;
-            btnBadFeedback.setBackgroundTintList(getResources().getColorStateList(R.color.design_default_color_error));
-            btnGoodFeedback.setBackgroundTintList(getResources().getColorStateList(android.R.color.holo_green_dark));
+            btnBadFeedback.setBackgroundTintList(androidx.core.content.ContextCompat.getColorStateList(getContext(), R.color.design_default_color_error));
+            btnGoodFeedback.setBackgroundTintList(androidx.core.content.ContextCompat.getColorStateList(getContext(), android.R.color.holo_green_dark));
             btnGoodFeedback.setAlpha(0.5f);
             btnBadFeedback.setAlpha(1.0f);
             etFeedbackText.setVisibility(View.VISIBLE);
@@ -424,7 +425,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
     }
     
     private void setupTemperatureChart() {
-        if (weatherDataList.isEmpty()) return;
+        if (temperatureChart == null || weatherDataList.isEmpty()) return;
         
         List<Entry> maxTempEntries = new ArrayList<>();
         List<Entry> minTempEntries = new ArrayList<>();
@@ -464,105 +465,73 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         temperatureChart.setDescription(desc);
         
         temperatureChart.invalidate();
+        
+        temperatureChartCard.setVisibility(View.VISIBLE);
     }
     
     private void setupHumidityChart() {
-        if (weatherDataList.isEmpty()) return;
+        if (humidityChart == null || weatherDataList.isEmpty()) return;
         
-        List<BarEntry> humidityEntries = new ArrayList<>();
-        List<BarEntry> precipEntries = new ArrayList<>();
-        List<String> labels = new ArrayList<>();
+        List<Float> humidity = new ArrayList<>();
+        List<String> dates = new ArrayList<>();
         
         for (int i = 0; i < weatherDataList.size(); i++) {
             WeatherData data = weatherDataList.get(i);
-            humidityEntries.add(new BarEntry(i, data.getHumidityFloat()));
-            precipEntries.add(new BarEntry(i, data.getPrecipFloat()));
-            labels.add(formatShortDate(data.getFxDate()));
+            humidity.add(data.getHumidityFloat());
+            dates.add(formatShortDate(data.getFxDate()));
         }
         
-        BarDataSet humidityDataSet = new BarDataSet(humidityEntries, "湿度(%)");
-        humidityDataSet.setColor(Color.CYAN);
+        humidityChart.setData(humidity, dates);
+        humidityChart.setTitle("湿度趋势");
+        humidityChart.setYAxisLabel("湿度(%)");
+        humidityChart.setLineColor(Color.BLUE);
+        humidityChart.setChartType(1); // 1表示柱状图
+        humidityChart.setBarColor(Color.rgb(0, 128, 255));
         
-        BarDataSet precipDataSet = new BarDataSet(precipEntries, "降水量(mm)");
-        precipDataSet.setColor(Color.BLUE);
-        
-        BarData barData = new BarData(humidityDataSet, precipDataSet);
-        barData.setBarWidth(0.3f);
-        
-        humidityChart.setData(barData);
-        humidityChart.groupBars(0f, 0.4f, 0f);
-        
-        XAxis xAxis = humidityChart.getXAxis();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        
-        Description desc = new Description();
-        desc.setText("湿度和降水量对比");
-        humidityChart.setDescription(desc);
-        
-        humidityChart.invalidate();
+        humidityChartCard.setVisibility(View.VISIBLE);
     }
     
     private void setupPressureChart() {
-        if (weatherDataList.isEmpty()) return;
+        if (pressureChart == null || weatherDataList.isEmpty()) return;
         
-        List<Entry> pressureEntries = new ArrayList<>();
-        List<String> labels = new ArrayList<>();
+        List<Float> pressure = new ArrayList<>();
+        List<String> dates = new ArrayList<>();
         
         for (int i = 0; i < weatherDataList.size(); i++) {
             WeatherData data = weatherDataList.get(i);
-            pressureEntries.add(new Entry(i, data.getPressureFloat()));
-            labels.add(formatShortDate(data.getFxDate()));
+            pressure.add(data.getPressureFloat());
+            dates.add(formatShortDate(data.getFxDate()));
         }
         
-        LineDataSet pressureDataSet = new LineDataSet(pressureEntries, "气压(hPa)");
-        pressureDataSet.setColor(Color.GREEN);
-        pressureDataSet.setCircleColor(Color.GREEN);
-        pressureDataSet.setLineWidth(3f);
-        pressureDataSet.setCircleRadius(5f);
-        pressureDataSet.setValueTextSize(10f);
+        pressureChart.setData(pressure, dates);
+        pressureChart.setTitle("气压趋势");
+        pressureChart.setYAxisLabel("气压(hPa)");
+        pressureChart.setLineColor(Color.GREEN);
         
-        LineData lineData = new LineData(pressureDataSet);
-        pressureChart.setData(lineData);
-        
-        XAxis xAxis = pressureChart.getXAxis();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        
-        Description desc = new Description();
-        desc.setText("气压变化趋势");
-        pressureChart.setDescription(desc);
-        
-        pressureChart.invalidate();
+        pressureChartCard.setVisibility(View.VISIBLE);
     }
     
     private void setupWeatherDistributionChart() {
-        if (weatherDataList.isEmpty()) return;
+        if (weatherDistributionChart == null || weatherDataList.isEmpty()) return;
         
+        // 统计不同天气类型的出现次数
         Map<String, Integer> weatherCount = new HashMap<>();
         for (WeatherData data : weatherDataList) {
             String weather = data.getTextDay();
             weatherCount.put(weather, weatherCount.getOrDefault(weather, 0) + 1);
         }
         
-        List<PieEntry> entries = new ArrayList<>();
+        // 准备饼图数据
+        List<com.example.weixin.utils.PieChartHelper.PieEntry> entries = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : weatherCount.entrySet()) {
-            entries.add(new PieEntry(entry.getValue(), entry.getKey()));
+            entries.add(new com.example.weixin.utils.PieChartHelper.PieEntry(entry.getValue(), entry.getKey()));
         }
         
-        PieDataSet dataSet = new PieDataSet(entries, "天气状况分布");
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        dataSet.setValueTextSize(12f);
-        dataSet.setValueTextColor(Color.BLACK);
+        weatherDistributionChart.setEntries(entries);
+        weatherDistributionChart.setTitle("天气状况分布");
+        weatherDistributionChart.setCenterText("天气分布");
         
-        PieData pieData = new PieData(dataSet);
-        weatherDistributionChart.setData(pieData);
-        
-        Description desc = new Description();
-        desc.setText("三天天气状况统计");
-        weatherDistributionChart.setDescription(desc);
-        
-        weatherDistributionChart.invalidate();
+        weatherDistributionCard.setVisibility(View.VISIBLE);
     }
     
     private void showAllCards() {
@@ -672,7 +641,7 @@ public class WeatherFragment extends Fragment implements View.OnClickListener {
         if (!weatherDataList.isEmpty()) {
             weatherInfo.append("\n未来天气预报:\n");
             for (WeatherData data : weatherDataList) {
-                weatherInfo.append(formatShortDate(data.getDate())).append(": ");
+                weatherInfo.append(formatShortDate(data.getFxDate())).append(": ");
                 weatherInfo.append("白天 ").append(data.getTextDay()).append(", ");
                 weatherInfo.append("夜间 ").append(data.getTextNight()).append(", ");
                 weatherInfo.append("温度 ").append(data.getTempMin()).append("-").append(data.getTempMax()).append("°C, ");

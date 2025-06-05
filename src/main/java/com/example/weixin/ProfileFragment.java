@@ -1,7 +1,9 @@
 package com.example.weixin;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +37,8 @@ public class ProfileFragment extends Fragment {
         initViews(view);
         setupListeners();
         
+        updateUserData();
+        
         return view;
     }
     
@@ -61,6 +65,18 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+    
+    private void updateUserData() {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UserDBHelper.COLUMN_NICKNAME, "周雨轩");
+        values.put(UserDBHelper.COLUMN_STUDENT_ID, "202252320116");
+        values.put(UserDBHelper.COLUMN_CLASS_NAME, "2022级智能科学与技术一班");
+        
+        db.update(UserDBHelper.TABLE_USER, values, 
+                UserDBHelper.COLUMN_USERNAME + " = ?", 
+                new String[]{"admin"});
     }
     
     private void loadUserData() {

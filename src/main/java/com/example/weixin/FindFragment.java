@@ -30,19 +30,19 @@ public class FindFragment extends Fragment {
             R.drawable.direct_seeding_img, R.drawable.shopping_img,
             R.drawable.game_img, R.drawable.small_routine_img,
             R.drawable.weather0, R.drawable.tab_weixin_pressed,
-            R.drawable.compass
+            R.drawable.compass, R.drawable.football1
     };
     private String[] data = new String[]{
             "朋友圈", "视频号", "扫一扫",
             "摇一摇", "看一看", "搜一搜",
             "直播和附近", "购物", "游戏", "小程序",
-            "天气", "计算器", "指南针"
+            "天气", "计算器", "指南针", "图片分析"
     };
     private int[] pic1 = new int[]{
             R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img,
             R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img,
             R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img, R.drawable.tab_img,
-            R.drawable.tab_img
+            R.drawable.tab_img, R.drawable.tab_img
     };
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,6 +90,11 @@ public class FindFragment extends Fragment {
                         Toast.makeText(getActivity(), "打开指南针", Toast.LENGTH_SHORT).show();
                         Intent compassIntent = new Intent(getActivity(), CompassActivity.class);
                         startActivity(compassIntent);
+                        break;
+                    case 13: // 图片分析功能
+                        Toast.makeText(getActivity(), "打开图片分析", Toast.LENGTH_SHORT).show();
+                        Intent imageAnalysisIntent = new Intent(getActivity(), ImageAnalysisActivity.class);
+                        startActivity(imageAnalysisIntent);
                         break;
                     default:
                         Toast.makeText(getActivity(), "点击了: " + data[position], Toast.LENGTH_SHORT).show();

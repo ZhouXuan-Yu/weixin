@@ -42,9 +42,9 @@ public class UserDBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, "admin");
         values.put(COLUMN_PASSWORD, "123456");
-        values.put(COLUMN_NICKNAME, "系统管理员");
-        values.put(COLUMN_STUDENT_ID, "12345678");
-        values.put(COLUMN_CLASS_NAME, "软件工程2班");
+        values.put(COLUMN_NICKNAME, "周雨轩");
+        values.put(COLUMN_STUDENT_ID, "202252320116");
+        values.put(COLUMN_CLASS_NAME, "2022级智能科学与技术一班");
         db.insert(TABLE_USER, null, values);
     }
 

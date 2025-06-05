@@ -82,7 +82,7 @@ public class MainWeixin extends FragmentActivity implements View.OnClickListener
         tabFind.setOnClickListener(this);
         tabProfile.setOnClickListener(this);
     }
-    
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.main_tab_weixin) {
