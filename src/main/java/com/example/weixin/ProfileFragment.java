@@ -38,10 +38,10 @@ public class ProfileFragment extends Fragment {
     private String nickname = "";
     private String studentId = "";
     private String className = "";
-    private String email = "zhouyuxuan@student.edu.cn";
-    private String phone = "18667890123";
+    private String email = "202252320116@student.edu.cn";
+    private String phone = "15978568969";
     private String major = "智能科学与技术";
-    private String college = "信息科学与工程学院";
+    private String college = "信息工程学院";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
